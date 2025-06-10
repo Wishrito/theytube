@@ -1,6 +1,6 @@
-# Adless YouTube Player
+# Theytube
 
-Adless YouTube Player est une application web simple qui permet de rechercher et de lire des vidéos YouTube sans publicités. Ce projet sert de proof of concept pour démontrer l'utilisation de bibliothèques Python telles que Flask, yt-dlp, et youtube-search.
+Theytube est une application web simple qui permet de rechercher et de lire des vidéos YouTube sans publicités. Ce projet sert de proof of concept pour démontrer l'utilisation de bibliothèques Python telles que Flask, yt-dlp, et youtube-search.
 
 ## Fonctionnalités
 
@@ -20,7 +20,7 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 1. Clonez ce dépôt sur votre machine locale :
 
    ```bash
-   git clone https://github.com/Wishrito/adless-youtube-player.git
+   git clone https://github.com/Wishrito/theytube.git
    cd adless-youtube-player
    ```
 
