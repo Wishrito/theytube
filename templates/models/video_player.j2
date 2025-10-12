@@ -1,30 +1,38 @@
-<div class="video-container">
+<div class="video-container relative bg-black rounded-xl overflow-hidden w-full max-w-5xl mx-auto">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/video-player.css') }}">
 
-<video id="video" src="{{ video_url }}"></video>
+    <video id="video" src="{{ video_url }}" class="w-full h-auto aspect-video"></video>
 
-<div class="controls">
-    <button id="play-pause" class="icon-button">
-        <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z" />
-        </svg>
-        <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" viewBox="0 0 24 24"
-            style="display: none;">
-            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-        </svg>
-    </button>
+    <!-- Contrôles -->
+    <div
+        class="controls absolute bottom-0 left-0 right-0 flex items-center gap-3 px-4 py-2 bg-black/60 text-white backdrop-blur-sm">
+        <!-- Lecture/Pause -->
+        <button id="play-pause" class="icon-button">
+            <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+            </svg>
+            <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24"
+                style="display: none;">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+            </svg>
+            </button>
 
-    <span id="time-display">00:00 / 00:00</span>
+        <!-- Temps -->
+        <span id="time-display" class="text-sm w-28 text-center">00:00 / 00:00</span>
 
-    <input type="range" id="seek" value="0" min="0" max="100">
+        <!-- Barre de progression -->
+        <div class="relative flex-1 h-2 bg-gray-400 rounded overflow-hidden cursor-pointer group" id="progress-bar-container">
+            <div id="progress" class="absolute left-0 top-0 h-full bg-indigo-500 transition-all"></div>
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-black/10"></div>
+        </div>
 
-    <button id="mute" class="icon-button">🔈</button>
+        <!-- Volume -->
+        <button id="mute" class="icon-button text-xl">🔊</button>
+        <input type="range" id="volume" value="1" min="0" max="1" step="0.05" class="w-20 accent-indigo-500">
 
-    <input type="range" id="volume" value="1" min="0" max="1" step="0.1">
+        <!-- Plein écran -->
+        <button id="fullscreen" class="icon-button text-xl">⛶</button>
+    </div>
 
-    <button id="fullscreen" class="icon-button">⛶</button>
-
-</div>
     <script src="{{ url_for('static', filename='scripts/video-player.js') }}"></script>
-
 </div>

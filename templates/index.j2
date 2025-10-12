@@ -1,10 +1,20 @@
 {% extends "models/layout.j2" %}
 {% block title %}Accueil{% endblock %}
+
 {% block content %}
-<h1 id="player-title">Theytube</h1>
-<form id="search-form" method="post">
-    <label for="query">Entrez votre recherche</label><br>
-    <input type="text" id="query" name="query" class="search-input" required>
-    <button type="submit" class="search-button">Rechercher</button>
-</form>
+<div class="flex flex-col items-center justify-center min-h-[80vh] px-4">
+    <h1 id="player-title" class="text-5xl font-bold text-indigo-600 mb-8">Theytube</h1>
+
+    <form id="search-form" method="post" class="w-full max-w-md bg-white rounded-xl shadow p-6">
+        <label for="query" class="block text-lg font-semibold mb-2 text-gray-700">
+            Entrez votre recherche
+        </label>
+        <input type="text" id="query" name="query" required
+            class="search-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:outline-none mb-4">
+        <button type="submit"
+            class="search-button w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 transition">
+            Rechercher
+        </button>
+    </form>
+</div>
 {% endblock %}

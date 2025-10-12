@@ -2,33 +2,52 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div class="player-layout">
-    <!-- Colonne de gauche : résultats -->
-    {% if query %}
-    <aside class="results-sidebar">
-        <h2>Résultats pour "{{ query }}"</h2>
-        <ul class="results-list">
-            {% for video in results %}
-            <li class="result-item">
-                <a class="video-link" href="{{ url_for('play', video_id=video['id'], query=query) }}">
-                    <img class="video-thumbnail" src="{{ video['thumbnails'][0] }}" alt="Miniature">
-                    <div class="video-info">
-                        <p class="video-title">{{ video['title'] }}</p>
-                        <p class="video-meta">{{ video['channel'] }} - {{ video['duration'] }}</p>
-                    </div>
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </aside>
-    {% endif %}
+<div class="flex flex-col lg:flex-row min-h-[80vh]">
 
-    <!-- Colonne de droite : lecteur -->
-    <main class="video-player-area">
-        <h1>{{ title }}</h1>
+    <!-- 🧭 Colonne de gauche : résultats -->
+    {% if query %}
+<aside
+    class="lg:w-1/3 bg-gray-50 border-r border-gray-200 p-4 overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-indigo-400 scrollbar-track-gray-100">
+    <h2 class="text-xl font-semibold text-indigo-600 mb-4">
+        Résultats pour "{{ query }}"
+    </h2>
+    <ul class="space-y-4">
+        {% for video in results %}
+        <li class="bg-white rounded-lg shadow hover:shadow-md transition">
+            <form method="post" class="h-full" action="{{ url_for('play', video_id=video['id']) }}">
+                <button class="block w-full text-left" type="submit">
+                    <img class="w-full h-48 object-cover rounded-t-lg" src="{{ video['thumbnails'][0] }}"
+                        alt="Miniature de la vidéo">
+                    <div class="p-4">
+                        <h3 class="video-title font-semibold text-gray-800 text-lg mb-1">
+                            {{ video['title'] }}
+                        </h3>
+                        <p class="video-meta text-gray-500 text-sm">
+                            {{ video['channel'] }} • {{ video['duration'] }}
+                        </p>
+                    </div>
+                    <input type="hidden" name="query" value="{{ query }}">
+                    </button>
+                    </form>
+                    </li>
+                    {% endfor %}
+                    </ul>
+                    </aside>
+                    {% endif %}
+
+<!-- ▶️ Colonne de droite : lecteur -->
+<main class="flex-1 p-6 bg-white">
+    <h1 class="text-3xl font-bold text-indigo-600 mb-4">{{ title }}</h1>
+    <div class="aspect-video rounded-lg overflow-hidden shadow">
         {% include 'models/video_player.j2' with context %}
-        <br>
-        <a href="{{ url_for('index') }}">Retour</a>
+        </div>
+        
+        <div class="mt-6">
+            <a href="{{ url_for('index') }}"
+                class="inline-block px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                Retour à l'accueil
+            </a>
+        </div>
     </main>
-    </div>
+</div>
 {% endblock %}
